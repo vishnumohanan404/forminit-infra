@@ -17,7 +17,7 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.8.5 
+          terraform_version: 1.8.5
           terraform_wrapper: false
 
       - name: Configure AWS credentials
@@ -39,11 +39,10 @@ jobs:
 
       - name: Extract Terraform output
         id: extract_output
-        run: |
-          echo "KUBECONFIG_FILE=$(terraform output kubeconfig)\n" >> $GITHUB_OUTPUT
+        run: terraform output -raw kubeconfig > kubeconfig.yaml
 
       - name: Set KUBECONFIG environment variable
-        run: export KUBECONFIG=${{steps.extract_output.outputs.KUBECONFIG_FILE }}
+        run: echo "KUBECONFIG=$GITHUB_WORKSPACE/kubeconfig.yaml" >> $GITHUB_ENV
 
       - name: Create Kubernetes Namespace
         run: |
