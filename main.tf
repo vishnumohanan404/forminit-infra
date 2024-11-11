@@ -31,7 +31,3 @@ output "kubeconfig" {
   value     = civo_kubernetes_cluster.my_cluster.kubeconfig
   sensitive = true
 }
-resource "local_file" "kubeconfig" {
-  filename = "/tmp/${civo_kubernetes_cluster.my_cluster.name}-kubeconfig" # Define the path and file name
-  content  = civo_kubernetes_cluster.my_cluster.kubeconfig
-}

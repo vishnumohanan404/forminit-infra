@@ -5,9 +5,6 @@ terraform {
       source  = "civo/civo"
       version = "1.0.19"
     }
-    local = {
-      source = "hashicorp/local"
-    }
   }
   backend "s3" {
     bucket         = "forminit-terraform-backend"
