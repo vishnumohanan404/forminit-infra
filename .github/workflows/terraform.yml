@@ -50,7 +50,7 @@ jobs:
           apiVersion: v1
           kind: Namespace
           metadata:
-            name: my-namespace
+            name: forminit
           EOF
         env:
           KUBECONFIG: ${{ github.workspace }}/kubeconfig.yaml
