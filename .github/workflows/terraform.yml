@@ -35,18 +35,18 @@ jobs:
       - name: Apply Terraform
         id: apply
         run: terraform apply -auto-approve -var="civo_api_key=${{ secrets.CIVO_API_KEY }}" -var="civo_region=${{ secrets.CIVO_REGION }}"
-      
-      - name: Set up kubectl
-        run: |
-          echo "${{ steps.apply.outputs.kubeconfig }}" > kubeconfig.yaml
-          export KUBECONFIG=kubeconfig.yaml
-          kubectl version
+
+      - name: Extract kubeconfig
+        run: echo "${{ steps.apply.outputs.kubeconfig }}" > kubeconfig.yaml
+
+      - name: Set KUBECONFIG environment variable
+        run: echo "KUBECONFIG=$GITHUB_WORKSPACE/kubeconfig.yaml" >> $GITHUB_ENV
+
       - name: Create Kubernetes Namespace
         run: |
           kubectl apply -f - <<EOF
           apiVersion: v1
           kind: Namespace
           metadata:
-            name: forminit-namespace
+            name: my-namespace
           EOF
-      
