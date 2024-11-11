@@ -50,3 +50,5 @@ jobs:
           metadata:
             name: my-namespace
           EOF
+        env:
+          KUBECONFIG: ${{ github.workspace }}/kubeconfig.yaml
