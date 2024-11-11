@@ -39,11 +39,12 @@ jobs:
       - name: Extract Terraform output
         id: extract_output
         run: |
-          echo "KUBECONFIG_FILE=$(terraform output -raw kubeconfig)" >> $GITHUB_OUTPUT
+          echo "KUBECONFIG_FILE=$(terraform output kubeconfig)" >> $GITHUB_OUTPUT
           echo $GITHUB_OUTPUT
 
       - name: Set KUBECONFIG environment variable
         run: export KUBECONFIG=${{steps.extract_output.outputs.KUBECONFIG_FILE }}
+
       - name: Create Kubernetes Namespace
         run: |
           kubectl apply -f - <<EOF
