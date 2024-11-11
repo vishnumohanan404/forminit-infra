@@ -30,11 +30,7 @@ jobs:
         run: terraform init
 
       - name: Plan Terraform changes
-        run: terraform plan \
-          -var="civo_api_key=${{ secrets.CIVO_API_KEY }}" \
-          -var="civo_region=${{ secrets.CIVO_REGION }}"
+        run: terraform plan -var="civo_api_key=${{ secrets.CIVO_API_KEY }}" -var="civo_region=${{ secrets.CIVO_REGION }}"
 
       - name: Apply Terraform
-        run: terraform apply -auto-approve \
-          -var="civo_api_key=${{ secrets.CIVO_API_KEY }}" \
-          -var="civo_region=${{ secrets.CIVO_REGION }}"
+        run: terraform apply -auto-approve -var="civo_api_key=${{ secrets.CIVO_API_KEY }}" -var="civo_region=${{ secrets.CIVO_REGION }}"
