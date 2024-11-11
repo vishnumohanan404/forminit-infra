@@ -40,8 +40,7 @@ jobs:
       - name: Extract Terraform output
         id: extract_output
         run: |
-          KUBECONFIG_FILE=$(terraform output kubeconfig)
-          echo $KUBECONFIG_FILE
+          echo "KUBECONFIG_FILE=$(terraform output kubeconfig)\n" >> $GITHUB_OUTPUT
 
       - name: Set KUBECONFIG environment variable
         run: export KUBECONFIG=${{steps.extract_output.outputs.KUBECONFIG_FILE }}
