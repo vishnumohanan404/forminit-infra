@@ -19,7 +19,7 @@ resource "civo_kubernetes_cluster" "my_cluster" {
   network_id  = civo_network.custom_network.id
   pools {
     node_count = 2
-    size       = "g3.medium"
+    size       = "g4s.kube.medium"
   }
   depends_on = [civo_firewall.my_firewall] # Ensure the firewall is created first
 }
