@@ -10,6 +10,7 @@ resource "civo_firewall" "my_firewall" {
   name                 = "my-firewall"
   create_default_rules = true
   network_id           = civo_network.custom_network.id
+  depends_on           = [civo_network.custom_network]
 }
 
 # Define the Kubernetes cluster
@@ -22,7 +23,7 @@ resource "civo_kubernetes_cluster" "my_cluster" {
     size       = "g4s.kube.small"
   }
 
-  #   depends_on = [civo_firewall.my_firewall] # Ensure the firewall is created first
+  depends_on = [civo_firewall.my_firewall] # Ensure the firewall is created first
 }
 
 # Output kubeconfig as a string
@@ -45,5 +46,5 @@ resource "kubernetes_namespace" "my_namespace" {
   metadata {
     name = var.k8s_namespace
   }
-  depends_on = [civo_kubernetes_cluster.my_cluster]
+  depends_on = [civo_kubernetes_cluster.my_cluster, local_file.kubeconfig]
 }

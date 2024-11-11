@@ -12,7 +12,6 @@ variable "civo_cluster_name" {
 variable "civo_region" {
   type        = string
   description = "Civo region to deploy the cluster"
-  default     = "LON1"
 }
 
 variable "civo_cluster_nodes" {

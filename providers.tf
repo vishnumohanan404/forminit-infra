@@ -6,6 +6,13 @@ terraform {
       version = "1.0.19"
     }
   }
+  backend "s3" {
+    bucket         = "forminit-terraform-backend"
+    key            = "terraform/state"
+    region         = "us-east-1"
+    dynamodb_table = "forminit-terraform-lock-table"
+  }
+
 }
 
 provider "civo" {
