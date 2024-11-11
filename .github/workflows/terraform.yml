@@ -36,12 +36,14 @@ jobs:
         id: apply
         run: terraform apply -auto-approve -var="civo_api_key=${{ secrets.CIVO_API_KEY }}" -var="civo_region=${{ secrets.CIVO_REGION }}"
 
-      - name: Extract kubeconfig
-        run: echo "${{ steps.apply.outputs.kubeconfig }}" > kubeconfig.yaml
+      - name: Extract Terraform output
+        id: output
+        run: |
+          echo "KUBECONFIG_FILE=$(terraform output -raw kubeconfig)" >> $GITHUB_OUTPUT
+          echo $GITHUB_OUTPUT
 
       - name: Set KUBECONFIG environment variable
-        run: echo "KUBECONFIG=$GITHUB_WORKSPACE/kubeconfig.yaml" >> $GITHUB_ENV
-
+        run: export KUBECONFIG=${GITHUB_OUTPUT.KUBECONFIG_FILE}
       - name: Create Kubernetes Namespace
         run: |
           kubectl apply -f - <<EOF
