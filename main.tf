@@ -10,6 +10,13 @@ resource "civo_firewall" "my_firewall" {
   network_id           = civo_network.custom_network.id
   depends_on           = [civo_network.custom_network]
   ingress_rule {
+    label      = "http"
+    protocol   = "tcp"
+    port_range = "80" # Added HTTP (port 80) rule
+    cidr       = ["0.0.0.0/0"]
+    action     = "allow"
+  }
+  ingress_rule {
     label      = "https"
     protocol   = "tcp"
     port_range = "443"
