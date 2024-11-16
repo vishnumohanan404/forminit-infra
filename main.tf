@@ -7,9 +7,9 @@ resource "civo_network" "custom_network" {
 # Firewall
 resource "civo_firewall" "my_firewall" {
   name                 = "my-firewall"
-  create_default_rules = true
   network_id           = civo_network.custom_network.id
   depends_on           = [civo_network.custom_network]
+  create_default_rules = true
   # ingress_rule {
   #   label      = "https"
   #   protocol   = "tcp"
