@@ -40,7 +40,9 @@ jobs:
       - name: Extract Terraform output
         id: extract_output
         run: terraform output -raw kubeconfig > kubeconfig.yaml
-
+      - name: Extract Terraform output and check kubeconfig content
+        run: |
+          terraform output -raw kubeconfig
       - name: Output kubeconfig.yaml for debugging
         run: cat kubeconfig.yaml
 
