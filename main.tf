@@ -24,6 +24,13 @@ resource "civo_firewall" "my_firewall" {
     cidr       = ["0.0.0.0/0"]
     action     = "allow"
   }
+  ingress_rule {
+    label      = "allow_k8s_proxy"
+    protocol   = "tcp"
+    port_range = "8080"
+    cidr       = ["0.0.0.0/0"]
+    action     = "allow"
+  }
   egress_rule {
     label      = "all"
     protocol   = "tcp"
