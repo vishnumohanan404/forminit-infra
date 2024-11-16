@@ -44,7 +44,6 @@ resource "civo_kubernetes_cluster" "my_cluster" {
   }
   depends_on = [civo_firewall.my_firewall] # Ensure the firewall is created first
 }
-
 # Confirmation
 output "kubeconfig" {
   value     = civo_kubernetes_cluster.my_cluster.kubeconfig
