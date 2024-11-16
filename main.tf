@@ -7,9 +7,30 @@ resource "civo_network" "custom_network" {
 # Firewall
 resource "civo_firewall" "my_firewall" {
   name                 = "my-firewall"
-  create_default_rules = true
+  create_default_rules = false
   network_id           = civo_network.custom_network.id
   depends_on           = [civo_network.custom_network]
+  ingress_rule {
+    label      = "https"
+    protocol   = "tcp"
+    port_range = "443"
+    cidr       = ["0.0.0.0/0"]
+    action     = "allow"
+  }
+  ingress_rule {
+    label      = "allow_k8s_api"
+    protocol   = "tcp"
+    port_range = "6443"
+    cidr       = ["0.0.0.0/0"]
+    action     = "allow"
+  }
+  egress_rule {
+    label      = "all"
+    protocol   = "tcp"
+    port_range = "1-65535"
+    cidr       = ["0.0.0.0/0"]
+    action     = "allow"
+  }
 }
 
 # Kubernetes cluster

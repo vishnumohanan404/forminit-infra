@@ -3,7 +3,7 @@ terraform {
   required_providers {
     civo = {
       source  = "civo/civo"
-      version = "1.0.19"
+      version = "1.1.3"
     }
   }
   backend "s3" {
