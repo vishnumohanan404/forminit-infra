@@ -54,5 +54,4 @@ resource "civo_kubernetes_cluster" "my_cluster" {
 # Confirmation
 output "kubeconfig" {
   value     = civo_kubernetes_cluster.my_cluster.kubeconfig
-  sensitive = false
 }
