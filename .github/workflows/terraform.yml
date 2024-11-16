@@ -48,6 +48,9 @@ jobs:
         run: echo "KUBECONFIG=$GITHUB_WORKSPACE/kubeconfig.yaml" >> $GITHUB_ENV
       - name: Check KUBECONFIG environment variable
         run: echo "KUBECONFIG=$KUBECONFIG"
+      - name: Output kubeconfig.yaml for debugging
+        run: cat $KUBECONFIG
+
       - name: Create Kubernetes Namespace
         run: |
           kubectl apply -f - <<EOF
