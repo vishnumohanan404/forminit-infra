@@ -4,3 +4,5 @@ This repo contains terraform code for deploying a minimalistic infrastructure fo
 
 1. A 3 node cluster in Civo Cloud using Kubernetes.
 2. A kubernetes namespace for the web application.
+
+![Diagram](./diagram.png)
